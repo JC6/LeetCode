@@ -16,7 +16,12 @@ public class Solution {
         return result;
     }
 
-    public int addDigits(int num) {
-        return (num - 1) % 9 + 1;
+    public static int addDigits(int num) {
+        int sum = 0;
+        while (num > 0) {
+            sum += num % 10;
+            num /= 10;
+        }
+        return sum > 9 ? addDigits(sum) : sum;
     }
 }
