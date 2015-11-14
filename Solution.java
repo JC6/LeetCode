@@ -16,12 +16,16 @@ public class Solution {
         return result;
     }
 
-    public static int addDigits(int num) {
+    public int addDigits(int num) {
         int sum = 0;
         while (num > 0) {
             sum += num % 10;
             num /= 10;
         }
         return sum > 9 ? addDigits(sum) : sum;
+    }
+
+    public boolean canWinNim(int n) {
+        return n % 4 != 0;
     }
 }
