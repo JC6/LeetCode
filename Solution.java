@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Solution {
 
@@ -27,5 +28,17 @@ public class Solution {
 
     public boolean canWinNim(int n) {
         return n % 4 != 0;
+    }
+
+    public int singleNumber(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            if (set.contains(num)) {
+                set.remove(num);
+            } else {
+                set.add(num);
+            }
+        }
+        return set.iterator().next();
     }
 }
