@@ -1,5 +1,5 @@
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class Solution {
 
@@ -17,28 +17,68 @@ public class Solution {
         return result;
     }
 
+    public int reverse(int x) {
+        int result = 0;
+        while (x != 0) {
+            if (result > Integer.MAX_VALUE / 10 || result == Integer.MAX_VALUE / 10 && x % 10 > Integer.MAX_VALUE % 10
+                    || result < Integer.MIN_VALUE / 10 || result == Integer.MIN_VALUE / 10 && x % 10 > Integer.MAX_VALUE % 10) {
+                return 0;
+            }
+            result = result * 10 + x % 10;
+            x /= 10;
+        }
+        return result;
+    }
+
+    public int myAtoi(String str) {
+        str = str.trim();
+        String result = "";
+        for (int i = 0; i < str.length(); i++) {
+            if (i == 0 && (str.charAt(0) == '+' || str.charAt(0) == '-')) {
+                result = result.concat(Character.toString(str.charAt(0)));
+                continue;
+            }
+            if (!Character.isDigit(str.charAt(i))) {
+                break;
+            }
+            result = result.concat(Character.toString(str.charAt(i)));
+        }
+        try {
+            return Integer.parseInt(result);
+        } catch (NumberFormatException e) {
+            if (result.length() > 1) {
+                if (result.charAt(0) == '-') {
+                    return Integer.MIN_VALUE;
+                }
+                return Integer.MAX_VALUE;
+            }
+            return 0;
+        }
+    }
+
+    public int singleNumber(int[] nums) {
+        Arrays.sort(nums);
+        if (nums.length == 1 || nums[0] != nums[1]) {
+            return nums[0];
+        }
+        for (int i = 2; i < nums.length - 1; i++) {
+            if (nums[i] != nums[i - 1] && nums[i] != nums[i + 1]) {
+                return nums[i];
+            }
+        }
+        return nums[nums.length - 1];
+    }
+
     public int addDigits(int num) {
-        int sum = 0;
+        int result = 0;
         while (num > 0) {
-            sum += num % 10;
+            result += num % 10;
             num /= 10;
         }
-        return sum > 9 ? addDigits(sum) : sum;
+        return result > 9 ? addDigits(result) : result;
     }
 
     public boolean canWinNim(int n) {
         return n % 4 != 0;
-    }
-
-    public int singleNumber(int[] nums) {
-        HashSet<Integer> set = new HashSet<>();
-        for (int num : nums) {
-            if (set.contains(num)) {
-                set.remove(num);
-            } else {
-                set.add(num);
-            }
-        }
-        return set.iterator().next();
     }
 }
