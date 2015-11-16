@@ -65,6 +65,21 @@ public class Solution {
         }
     }
 
+    public boolean isNumber(String s) {
+        s = s.trim();
+        try {
+            switch (s.charAt(s.length() - 1)) {
+                case 'D':
+                case 'f':
+                    return false;
+            }
+            Double.parseDouble(s);
+            return true;
+        } catch (RuntimeException e) {
+            return false;
+        }
+    }
+
     public int singleNumber(int[] nums) {
         Arrays.sort(nums);
         if (nums.length == 1 || nums[0] != nums[1]) {
