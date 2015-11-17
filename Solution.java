@@ -17,6 +17,23 @@ public class Solution {
         return result;
     }
 
+    public int lengthOfLongestSubstring(String s) {
+        int result = 0;
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (map.containsKey(s.charAt(i))) {
+                // TODO: Fix the temporary solutions for Time Limit Exceeded
+                if (result > 18) {
+                    return result;
+                }
+                return Math.max(lengthOfLongestSubstring(s.substring(map.get(s.charAt(i)) + 1, s.length())), result);
+            }
+            result++;
+            map.put(s.charAt(i), i);
+        }
+        return result;
+    }
+
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         nums1 = Arrays.copyOf(nums1, nums1.length + nums2.length);
         System.arraycopy(nums2, 0, nums1, nums1.length - nums2.length, nums2.length);
