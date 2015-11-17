@@ -19,17 +19,15 @@ public class Solution {
 
     public int lengthOfLongestSubstring(String s) {
         int result = 0;
+        int beginIndex = -1;
         HashMap<Character, Integer> map = new HashMap<>();
         for (int i = 0; i < s.length(); i++) {
-            if (map.containsKey(s.charAt(i))) {
-                // TODO: Fix the temporary solutions for Time Limit Exceeded
-                if (result > 18) {
-                    return result;
-                }
-                return Math.max(lengthOfLongestSubstring(s.substring(map.get(s.charAt(i)) + 1, s.length())), result);
+            char ch = s.charAt(i);
+            if (map.containsKey(ch)) {
+                beginIndex = Math.max(beginIndex, map.get(ch));
             }
-            result++;
-            map.put(s.charAt(i), i);
+            map.put(ch, i);
+            result = Math.max(result, i - beginIndex);
         }
         return result;
     }
