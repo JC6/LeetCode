@@ -83,13 +83,14 @@ public class Solution {
     public boolean isNumber(String s) {
         s = s.trim();
         try {
+            Double.parseDouble(s);
             switch (s.charAt(s.length() - 1)) {
                 case 'D':
                 case 'f':
                     return false;
+                default:
+                    return true;
             }
-            Double.parseDouble(s);
-            return true;
         } catch (RuntimeException e) {
             return false;
         }
