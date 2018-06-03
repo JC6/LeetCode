@@ -1,8 +1,11 @@
 class Solution:
     def twoSum(self, nums, target):
-        di = dict()
-        for i, v in enumerate(nums):
-            if target - v not in di:
-                di[v] = i
-            else:
-                return di[target - v], i
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        for i in range(len(nums)):
+            for j in range(i + 1, len(nums)):
+                if nums[j] == target - nums[i]:
+                    return [i,j]
